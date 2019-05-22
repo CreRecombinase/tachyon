@@ -1,6 +1,6 @@
 #include "variant_block.h"
 
-#include "third_party/xxhash/xxhash.h"
+#include "xxhash.h"
 
 namespace tachyon{
 

@@ -3,7 +3,7 @@
 #include "algorithm/permutation/genotype_sorter.h"
 #include "algorithm/compression/compression_manager.h"
 
-#include "third_party/xxhash/xxhash.h"
+#include "xxhash.h"
 
 namespace tachyon {
 

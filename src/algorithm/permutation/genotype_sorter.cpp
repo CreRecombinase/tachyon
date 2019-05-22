@@ -1,5 +1,5 @@
 #include "genotype_sorter.h"
-#include "third_party/xxhash/xxhash.h"
+#include "xxhash.h"
 
 namespace tachyon {
 namespace algorithm {

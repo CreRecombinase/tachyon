@@ -22,7 +22,7 @@ DEALINGS IN THE SOFTWARE.
 ==============================================================================*/
 #ifndef TACHYON_H_
 #define TACHYON_H_
-
+#include "config.h"
 #include <string>
 #include <regex>
 
@@ -106,9 +106,7 @@ extern std::string LITERAL_COMMAND_LINE;
 extern std::string INTERPRETED_COMMAND;
 
 /*------   Version   ------*/
-const int32_t TACHYON_VERSION_MAJOR = 0;
-const int32_t TACHYON_VERSION_MINOR = 6;
-const int32_t TACHYON_VERSION_PATCH = 0;
+
 const int32_t TACHYON_VERSION_NUMBER  = (TACHYON_VERSION_MAJOR *100*100 + TACHYON_VERSION_MINOR *100 + TACHYON_VERSION_PATCH);
 const std::string TACHYON_LIB_VERSION = std::to_string(TACHYON_VERSION_MAJOR) + '.' + std::to_string(TACHYON_VERSION_MINOR) + '.' + std::to_string(TACHYON_VERSION_PATCH);
 

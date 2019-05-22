@@ -12,7 +12,7 @@
 #include "variant_record.h"
 #include "containers/vcf_container.h"
 
-#include "third_party/xxhash/xxhash.h"
+#include "xxhash.h"
 
 namespace tachyon{
 namespace algorithm{
