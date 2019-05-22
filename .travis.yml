@@ -299,6 +299,8 @@ before_install:
   - git clone https://github.com/facebook/zstd
   - cd zstd && make -j4 && sudo make install && cd ..
   - git clone https://github.com/samtools/htslib
+  - git clone https://github.com/Cyan4973/xxHash
+  - cd xxHash && make -j4 && sudo make install && cd ..
   - cd htslib && autoheader && autoconf && ./configure && make -j 4 && sudo make install && cd ..
 
 script:
