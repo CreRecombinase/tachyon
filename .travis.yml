@@ -303,5 +303,5 @@ before_install:
 
 script:
   - git submodule update --recursive
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make -j 4 OPENSSL_PATH=/usr/local/opt/openssl/; else make -j 4; fi
+  - ./configure && make -j 4
   
