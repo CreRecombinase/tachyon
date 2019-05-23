@@ -5,6 +5,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([TACHYON], [0.6.1], [BUG-REPORT-ADDRESS])
+AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
 AC_ENABLE_SHARED
@@ -80,14 +81,6 @@ PKG_CHECK_MODULES([HTS], htslib, [
 
       [AC_MSG_ERROR(htslib was not found)])
   ])
-
-dnl ACX_PTHREAD
-dnl AC_CHECK_LIB(pthread, pthread_create)
-
-dnl CC="${PTHREAD_CC}"
-dnl CXX="${PTHREAD_CXX}"
-dnl LIBS="$PTHREAD_LIBS $LIBS"
-dnl CXXFLAGS="$CXXFLAGS $PTHREAD_CXXFLAGS"
 
 
 CXXFLAGS="-I./src $CXXFLAGS"

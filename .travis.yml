@@ -305,5 +305,5 @@ before_install:
 
 script:
   - git submodule update --recursive
-  - autoreconf --force --install && ./configure && make -j 4
+  - ./configure && make -j 4
   
