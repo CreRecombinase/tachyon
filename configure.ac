@@ -11,7 +11,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_ENABLE_SHARED
 AC_DISABLE_STATIC
 LT_INIT
-
+AM_MAINTAINER_MODE([enable])
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([include/config.h])
