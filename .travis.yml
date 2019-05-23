@@ -23,7 +23,7 @@ matrix:
             - libbz2-dev
             - liblzma-dev
       env:
-        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7 && CFLAGS='std=c99'"
+        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
       compiler: clang
 
     # works on Precise and Trusty
@@ -277,30 +277,30 @@ matrix:
     - os: osx
       osx_image: xcode10
       env:
-        - MATRIX_EVAL="brew update && brew install gcc@5 && brew install openssl && CC=gcc-5 && CXX=g++-5
+        - MATRIX_EVAL="brew update && brew install gcc@5 && brew install openssl && CC=gcc-5 && CXX=g++-5"
 
     - os: osx
       osx_image: xcode10
       env:
-        - MATRIX_EVAL="brew update && brew install gcc@6 && brew install openssl && CC=gcc-6 && CXX=g++-6
+        - MATRIX_EVAL="brew update && brew install gcc@6 && brew install openssl && CC=gcc-6 && CXX=g++-6"
 
     - os: osx
       osx_image: xcode10
       env:
-        - MATRIX_EVAL="brew update && brew install gcc@7 && brew install openssl && CC=gcc-7 && CXX=g++-7
+        - MATRIX_EVAL="brew update && brew install gcc@7 && brew install openssl && CC=gcc-7 && CXX=g++-7"
 
     - os: osx
       osx_image: xcode10
       env:
-        - MATRIX_EVAL="brew update && brew install gcc@8 && brew install openssl && CC=gcc-8 && CXX=g++-8
+        - MATRIX_EVAL="brew update && brew install gcc@8 && brew install openssl && CC=gcc-8 && CXX=g++-8"
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - cd xxHash && && CFLAGS='std=c99' make -j4 && sudo make install && cd ..
   - git clone https://github.com/facebook/zstd
   - cd zstd && make -j4 && sudo make install && cd ..
   - git clone https://github.com/samtools/htslib
   - git clone https://github.com/Cyan4973/xxHash
-  - cd xxHash && make -j4 && sudo make install && cd ..
   - cd htslib && autoheader && autoconf && ./configure && make -j 4 && sudo make install && cd ..
 
 script:
