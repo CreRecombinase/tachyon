@@ -117,7 +117,7 @@ AC_SUBST(CXXFLAGS)
 AC_SUBST(CFLAGS)
 
 AC_DEFINE( [VERSION], [PACKAGE_VERSION], [Patch version])
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile])
 
 #AC_CONFIG_FILES([makefile])
 AC_OUTPUT
