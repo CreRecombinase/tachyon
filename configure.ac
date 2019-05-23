@@ -35,7 +35,7 @@ dnl AX_CHECK_COMPILE_FLAG([-std=c++0x], [
 dnl                         CXXFLAGS="$CXXFLAGS -std=c++0x"])
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lcrypto':
-m4_ifdef([PKG_PROG_PKG_CONFIG], [PKG_PROG_PKG_CONFIG], [PKG_CONFIG=""])
+dnl m4_ifdef([PKG_PROG_PKG_CONFIG], [PKG_PROG_PKG_CONFIG], [PKG_CONFIG=""])
 
 # FIXME: Replace `main' with a function in `-lhts':
 PKG_CHECK_MODULES([ZSTD], libzstd, [

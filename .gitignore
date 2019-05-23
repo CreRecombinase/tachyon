@@ -60,7 +60,7 @@ config.h.in
 configure
 configure.scan
 coverage_report
-m4
+m4/*m4
 missing
 stamp-h1
 autoscan.log
