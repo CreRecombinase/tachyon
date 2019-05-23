@@ -49,14 +49,10 @@ lib*.so.*
 **.deps
 **.dirstamp
 /autom4te.cache/
-/config/
 Makefile
-app.info
-compile
 config.h
 configure.scan
 coverage_report
-missing
 stamp-h1
 autoscan.log
 config.log
