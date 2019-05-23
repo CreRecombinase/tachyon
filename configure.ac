@@ -5,21 +5,35 @@
 
 AC_PREREQ([2.69])
 AC_INIT([TACHYON], [0.6.1], [BUG-REPORT-ADDRESS])
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR(m4)
+
+AC_ENABLE_SHARED
+AC_DISABLE_STATIC
+LT_INIT
+
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/main.cpp])
-
 AC_CONFIG_HEADERS([include/config.h])
-AC_DEFINE([TACHYON_VERSION_MAJOR], [0], [Major version])
-AC_DEFINE([TACHYON_VERSION_MINOR], [6], [Minor version])
-AC_DEFINE([TACHYON_VERSION_PATCH], [1], [Patch version])
-AC_DEFINE([VERSION], [PACKAGE_VERSION], [Patch version])
+
+AC_DEFINE( [TACHYON_VERSION_MAJOR], [0], [Major version])
+AC_DEFINE( [TACHYON_VERSION_MINOR], [6], [Minor version])
+AC_DEFINE( [TACHYON_VERSION_PATCH], [1], [Patch version])
 
 
 
+AC_LANG([C++])
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
 
 
+AX_CXX_COMPILE_STDCXX_11
+
+
+
+dnl AX_CHECK_COMPILE_FLAG([-std=c++0x], [
+dnl                         CXXFLAGS="$CXXFLAGS -std=c++0x"])
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lcrypto':
 m4_ifdef([PKG_PROG_PKG_CONFIG], [PKG_PROG_PKG_CONFIG], [PKG_CONFIG=""])
@@ -27,7 +41,7 @@ m4_ifdef([PKG_PROG_PKG_CONFIG], [PKG_PROG_PKG_CONFIG], [PKG_CONFIG=""])
 # FIXME: Replace `main' with a function in `-lhts':
 PKG_CHECK_MODULES([ZSTD], libzstd, [
     LIBS="$ZSTD_LIBS $LIBS"
-    CFLAGS="$ZSTD_CFLAGS $CFLAGS"
+    CXXFLAGS="$ZSTD_CFLAGS $CXXFLAGS"
     AC_DEFINE([WITH_ZSTD], [1], [Use zstd])
   ], [
     AC_SEARCH_LIBS(ZSTD_decompressStream, zstd,
@@ -37,7 +51,7 @@ PKG_CHECK_MODULES([ZSTD], libzstd, [
 
 PKG_CHECK_MODULES([XXHASH], libxxhash, [
     LIBS="XXHASH_LIBS $LIBS"
-    CFLAGS="$XXHASH_CFLAGS $CFLAGS"
+    CXXFLAGS="$XXHASH_CFLAGS $CXXFLAGS"
   ], [
     AC_SEARCH_LIBS(XXH64_update, xxhash,[
 
@@ -49,7 +63,7 @@ PKG_CHECK_MODULES([XXHASH], libxxhash, [
 
 PKG_CHECK_MODULES([CRYPTO], libcrypto, [
     LIBS="$CRYPTO_LIBS $LIBS"
-    CFLAGS="$CRYPTO_CFLAGS $CFLAGS"
+    CXXFLAGS="$CRYPTO_CFLAGS $CXXFLAGS"
     AC_DEFINE([WITH_CRYPTO], [1], [Use crypto])
   ], [
     AC_SEARCH_LIBS(ZSTD_decompressStream, crypto,
@@ -61,20 +75,26 @@ PKG_CHECK_MODULES([CRYPTO], libcrypto, [
 
 PKG_CHECK_MODULES([HTS], htslib, [
     LIBS="$HTS_LIBS $LIBS"
-    CFLAGS="$HTS_CFLAGS $CFLAGS"
+    CXXFLAGS="$HTS_CFLAGS $CXXFLAGS"
   ], [
     AC_SEARCH_LIBS(bcf_init1, hts,
 
       [AC_MSG_ERROR(htslib was not found)])
   ])
 
-# FIXME: Replace `main' with a function in `-lzstd':
-dnl AC_SEARCH_LIBS([zstd], [ZSTD_createCCtx],[],[
-dnl 		     AC_MSG_ERROR([unable to find ZSTD_createCCtx()])
-dnl ])
+dnl ACX_PTHREAD
+dnl AC_CHECK_LIB(pthread, pthread_create)
+
+dnl CC="${PTHREAD_CC}"
+dnl CXX="${PTHREAD_CXX}"
+LIBS="$PTHREAD_LIBS $LIBS"
+CXXFLAGS="$CXXFLAGS $PTHREAD_CXXFLAGS"
+
+
+CXXFLAGS="-I./src $CXXFLAGS"
 
 # Checks for header files.
-AC_CHECK_HEADERS([inttypes.h stdint.h stdlib.h strings.h sys/time.h])
+AC_CHECK_HEADERS([inttypes.h stdint.h stdlib.h strings.h sys/time.h pthread.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
@@ -93,9 +113,11 @@ AC_CHECK_TYPES([ptrdiff_t])
 dnl # Checks for library functions.
 AC_CHECK_FUNCS([gettimeofday memset pow strncasecmp])
 AC_SUBST(LIBS)
+AC_SUBST(CXXFLAGS)
 AC_SUBST(CFLAGS)
 
-AC_CONFIG_FILES([Makefile])
+AC_DEFINE( [VERSION], [PACKAGE_VERSION], [Patch version])
+AC_CONFIG_FILES([Makefile src/Makefile])
 
 #AC_CONFIG_FILES([makefile])
 AC_OUTPUT

@@ -45,3 +45,12 @@ zstd/
 # Binary and library
 tachyon
 lib*.so.*
+
+**.deps
+**.dirstamp
+autom4te.cache/
+
+autoscan.log
+build-aux/
+config.log
+config.status
