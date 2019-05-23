@@ -297,7 +297,7 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
   - git clone https://github.com/Cyan4973/xxHash
-  - cd xxHash && CFLAGS='-std=c99' make -j4 && sudo make install && cd ..
+  - cd xxHash && CFLAGS='-std=c99 -Oz' make -j4 && sudo make install && cd ..
   - git clone https://github.com/facebook/zstd
   - cd zstd && make -j4 && sudo make install && cd ..
   - git clone https://github.com/samtools/htslib
