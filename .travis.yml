@@ -3,6 +3,29 @@ language: cpp
 dist: trusty
 matrix:
   include:
+   # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.7
+          packages:
+            - clang-3.7
+            - pkg-config
+            - libncurses5-dev
+            - libncursesw5-dev
+            - zlib1g-dev 
+            - libssl-dev
+            - liblz4-dev
+            - libcurl4-openssl-dev 
+            - liblz-dev
+            - libbz2-dev
+            - liblzma-dev
+      env:
+        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7 && CFLAGS='std=c99'"
+      compiler: clang
+
     # works on Precise and Trusty
     - os: linux
       addons:
@@ -112,29 +135,6 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
       compiler: gcc
-
-    # works on Precise and Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.7
-          packages:
-            - clang-3.7
-            - pkg-config
-            - libncurses5-dev
-            - libncursesw5-dev
-            - zlib1g-dev 
-            - libssl-dev
-            - liblz4-dev
-            - libcurl4-openssl-dev 
-            - liblz-dev
-            - libbz2-dev
-            - liblzma-dev
-      env:
-        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7&& CFLAGS='std=c99'"
-      compiler: clang
 
     # works on Precise and Trusty
     - os: linux
