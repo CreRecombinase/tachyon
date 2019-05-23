@@ -133,7 +133,7 @@ matrix:
             - libbz2-dev
             - liblzma-dev
       env:
-        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
+        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7&& CFLAGS='std=c99'"
       compiler: clang
 
     # works on Precise and Trusty
