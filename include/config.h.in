@@ -18,6 +18,12 @@
 /* Define to 1 if you have the `memset' function. */
 #undef HAVE_MEMSET
 
+/* Define to 1 if you have the <openssl/engine.h> header file. */
+#undef HAVE_OPENSSL_ENGINE_H
+
+/* Define to 1 if you have the <openssl/evp.h> header file. */
+#undef HAVE_OPENSSL_EVP_H
+
 /* Define to 1 if you have the `pow' function. */
 #undef HAVE_POW
 
@@ -95,9 +101,6 @@
 
 /* Patch version */
 #undef VERSION
-
-/* Use crypto */
-#undef WITH_CRYPTO
 
 /* Use zstd */
 #undef WITH_ZSTD

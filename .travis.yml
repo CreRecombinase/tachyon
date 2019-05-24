@@ -3,7 +3,28 @@ language: cpp
 dist: trusty
 matrix:
   include:
-   # works on Precise and Trusty
+    # OSX begin
+    - os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew update && brew install gcc@5 && brew install openssl && CC=gcc-5 && CXX=g++-5"
+
+    - os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew update && brew install gcc@6 && brew install openssl && CC=gcc-6 && CXX=g++-6"
+
+    - os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew update && brew install gcc@7 && brew install openssl && CC=gcc-7 && CXX=g++-7"
+
+    - os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew update && brew install gcc@8 && brew install openssl && CC=gcc-8 && CXX=g++-8"
+
+    # works on Precise and Trusty
     - os: linux
       addons:
         apt:
@@ -273,26 +294,6 @@ matrix:
         - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
       compiler: clang
 
-    # OSX begin
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew update && brew install gcc@5 && brew install openssl && CC=gcc-5 && CXX=g++-5"
-
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew update && brew install gcc@6 && brew install openssl && CC=gcc-6 && CXX=g++-6"
-
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew update && brew install gcc@7 && brew install openssl && CC=gcc-7 && CXX=g++-7"
-
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew update && brew install gcc@8 && brew install openssl && CC=gcc-8 && CXX=g++-8"
 
 before_install:
   - eval "${MATRIX_EVAL}"

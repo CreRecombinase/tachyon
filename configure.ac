@@ -60,16 +60,18 @@ PKG_CHECK_MODULES([XXHASH], libxxhash, [
       [AC_MSG_ERROR(xxhash was not found)])
   ])
 
+AC_CHECK_HEADERS([openssl/engine.h openssl/evp.h])
 
-PKG_CHECK_MODULES([CRYPTO], libcrypto, [
-    LIBS="$CRYPTO_LIBS $LIBS"
-    CXXFLAGS="$CRYPTO_CFLAGS $CXXFLAGS"
-    AC_DEFINE([WITH_CRYPTO], [1], [Use crypto])
-  ], [
-    AC_SEARCH_LIBS(ZSTD_decompressStream, crypto,
+AX_CHECK_OPENSSL(
+  [have_openssl=yes],
+  AC_MSG_FAILURE([could not locate OpenSSL])
+)
 
-      [AC_MSG_ERROR(cryptolib was not found)])
-  ])
+if test "x$have_openssl" = "xyes"; then
+  LIBS="$LIBS $OPENSSL_LIBS"
+  CXXFLAGS="$CXXFLAGS $OPENSSL_INCLUDES"
+  LDFLAGS="$LDFLAGS $OPENSSL_LDFLAGS"
+fi
 
 
 
@@ -106,10 +108,35 @@ dnl # Checks for library functions.
 AC_CHECK_FUNCS([gettimeofday memset pow strncasecmp])
 AC_SUBST(LIBS)
 AC_SUBST(CXXFLAGS)
+AC_SUBST(LDFLAGS)
 AC_SUBST(CFLAGS)
 
 AC_DEFINE( [VERSION], [PACKAGE_VERSION], [Patch version])
 AC_CONFIG_FILES([Makefile])
+
+
+# Result of conf to screen
+AC_MSG_RESULT([
+--------------------------------------------------
+Configuration summary for $PACKAGE_NAME ($VERSION)
+--------------------------------------------------
+CC                  : $CC
+CPPFLAGS            : $CPPFLAGS
+CFLAGS            : $CFLAGS
+CXXFLAGS            : $CXXFLAGS
+CXX                 : $CXX
+---
+LDFLAGS             : $LDFLAGS
+LIBS                : $LIBS
+---
+Installation prefix : $prefix
+$LIBRARY_RESULT
+$SUMMARY_RESULT
+--------------------------------------------------
+Configuration OK
+--------------------------------------------------
+])
+
 
 #AC_CONFIG_FILES([makefile])
 AC_OUTPUT
